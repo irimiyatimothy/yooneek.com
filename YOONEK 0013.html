@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOONEEK BUSINESS CENTRE | Making a difference</title>
+    <style>
+        :root {
+            --primary-yellow: #FFC107;
+            --primary-hover: #E0A800;
+            --dark-black: #111111;
+            --secondary-black: #1E1E1E;
+            --light-bg: #F8F9FA;
+            --white: #FFFFFF;
+            --gray-border: #E0E0E0;
+            --text-dark: #222222;
+            --text-muted: #666666;
+            --status-green: #28A745;
+            --status-blue: #007BFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Header & Ticker */
+        .top-bar {
+            background-color: var(--dark-black);
+            color: var(--white);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            border-bottom: 2px solid var(--primary-yellow);
+        }
+
+        .ticker-wrap {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 65%;
+        }
+
+        .ticker {
+            display: inline-block;
+            animation: ticker 25s linear infinite;
+            color: var(--primary-yellow);
+            font-weight: 600;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .time-display {
+            font-weight: bold;
+            color: var(--white);
+            background: #2a2a2a;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* Navigation */
+        header {
+            background-color: var(--secondary-black);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .logo-box img {
+            max-height: 50px;
+            border-radius: 4px;
+        }
+
+        .logo-text h1 {
+            font-size: 20px;
+            color: var(--primary-yellow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo-text p {
+            font-size: 11px;
+            color: #DDD;
+            font-style: italic;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.2s;
+            padding: 6px 10px;
+            border-radius: 4px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--dark-black);
+            background-color: var(--primary-yellow);
+        }
+
+        .btn-portal {
+            background-color: var(--primary-yellow);
+            color: var(--dark-black) !important;
+            font-weight: bold;
+        }
+
+        /* Main Content Container */
+        .main-wrapper {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .section {
+            display: none;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        h2.section-title {
+            color: var(--dark-black);
+            border-left: 5px solid var(--primary-yellow);
+            padding-left: 12px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 22px;
+        }
+
+        /* Layout Grids */
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+
+        /* Component Cards */
+        .card {
+            border: 1px solid var(--gray-border);
+            border-radius: 6px;
+            padding: 20px;
+            background: var(--white);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        .price-badge {
+            display: inline-block;
+            background: var(--dark-black);
+            color: var(--primary-yellow);
+            padding: 4px 8px;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-top: 8px;
+            font-size: 13px;
+        }
+
+        /* Buttons & Forms */
+        .btn {
+            background-color: var(--dark-black);
+            color: var(--primary-yellow);
+            border: 1px solid var(--dark-black);
+            padding: 10px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-yellow);
+            color: var(--dark-black);
+        }
+
+        .btn-danger {
+            background-color: #DC3545;
+            color: white;
+            border: none;
+        }
+        .btn-danger:hover {
+            background-color: #BD2130;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--gray-border);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        table th, table td {
+            border: 1px solid var(--gray-border);
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: var(--secondary-black);
+            color: var(--primary-yellow);
+        }
+
+        table tr:nth-child(even) {
+            background-color: #F2F2F2;
+        }
+
+        /* Status Pills */
+        .status-pill {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            color: white;
+            display: inline-block;
+        }
+        .status-pending { background-color: #FFC107; color: #000; }
+        .status-processing { background-color: #17A2B8; }
+        .status-completed { background-color: #28A745; }
+
+        /* Auth Panel Tabs */
+        .auth-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--gray-border);
+            margin-bottom: 20px;
+        }
+        .auth-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            background: none;
+            border: none;
+        }
+        .auth-tab.active {
+            border-bottom: 3px solid var(--primary-yellow);
+            color: var(--dark-black);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-black);
+            color: var(--white);
+            padding: 30px 20px 15px;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .footer-grid h4 {
+            color: var(--primary-yellow);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid #333;
+            font-size: 12px;
+            color: #AAA;
+        }
+
+        /* Media Upload Thumbnails */
+        .img-thumb {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        /* Responsive Design Rules */
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 10px; }
+            nav ul { flex-wrap: wrap; justify-content: center; }
+            .top-bar { flex-direction: column; gap: 5px; text-align: center; }
+            .ticker-wrap { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic Announcement Ticker & Real-Time Clock -->
+    <div class="top-bar">
+        <div class="ticker-wrap">
+            <div class="ticker" id="scrollingTicker">
+                Welcome to YOONEEK BUSINESS CENTRE! Fast Printing, Photocopying, Graphic Design, and Online Registrations. Visit us at Shop No. 2, Beside Unity Baptist Church, Utako.
+            </div>
+        </div>
+        <div class="time-display" id="clockDisplay">00:00:00 AM</div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo-box" onclick="showSection('homeSection')">
+                <div id="navLogoContainer">
+                    <div style="background:var(--primary-yellow); color:var(--dark-black); font-weight:bold; width:40px; height:40px; display:flex; align-items:center; justify-content:center; border-radius:4px;">YBC</div>
+                </div>
+                <div class="logo-text">
+                    <h1 id="brandTitle">YOONEEK BUSINESS CENTRE</h1>
+                    <p id="brandMotto">Making a difference</p>
+                </div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showSection('homeSection')" class="nav-link active">Home</a></li>
+                    <li><a href="#" onclick="showSection('aboutSection')" class="nav-link">About Us</a></li>
+                    <li><a href="#" onclick="showSection('servicesSection')" class="nav-link">Services</a></li>
+                    <li><a href="#" onclick="showSection('productsSection')" class="nav-link">Products</a></li>
+                    <li><a href="#" onclick="showSection('pricingSection')" class="nav-link">Pricing</a></li>
+                    <li><a href="#" onclick="showSection('gallerySection')" class="nav-link">Gallery</a></li>
+                    <li><a href="#" onclick="showSection('contactSection')" class="nav-link">Contact</a></li>
+                    <li><a href="#" onclick="showSection('portalAuthSection')" class="btn-portal nav-link" id="authNavBtn">Portal Access</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Content Workspace -->
+    <div class="main-wrapper">
+
+        <!-- 1. HOME SECTION -->
+        <section id="homeSection" class="section active">
+            <div style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?auto=format&fit=crop&w=1200&q=80') center/cover; color: white; padding: 60px 30px; border-radius: 8px; text-align: center; margin-bottom: 30px;">
+                <h1 style="font-size: 36px; color: var(--primary-yellow); margin-bottom: 10px;">YOONEEK BUSINESS CENTRE</h1>
+                <p style="font-size: 18px; margin-bottom: 20px;" id="homeDescriptionText">Your one-stop destination for digital, printing, document processing, and administrative support services.</p>
+                <div style="display:flex; justify-content:center; gap: 15px; flex-wrap:wrap;">
+                    <button class="btn" onclick="showSection('servicesSection')">Explore Services</button>
+                    <button class="btn" style="background:var(--primary-yellow); color:var(--dark-black);" onclick="openPortalServiceRequest()">Request Service Online</button>
+                </div>
+            </div>
+
+            <h2 class="section-title">Core Services</h2>
+            <div class="grid-3" id="homeServicesGrid">
+                <!-- Dynamically Rendered -->
+            </div>
+
+            <div style="margin-top: 40px; background: #f1f1f1; padding: 25px; border-radius: 6px;">
+                <h2 class="section-title">Latest Announcements & Events</h2>
+                <div id="homeNewsFeed">
+                    <p>No active public updates. Check back later!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ABOUT US SECTION -->
+        <section id="aboutSection" class="section">
+            <h2 class="section-title">About YOONEEK BUSINESS CENTRE</h2>
+            <div class="grid-2">
+                <div>
+                    <h3>Our Profile</h3>
+                    <p id="aboutHistoryText" style="margin-top: 10px; line-height: 1.6;">YOONEEK BUSINESS CENTRE is a premier hub for modern digital, secretarial, document processing, and educational support solutions. Located strategically at Utako, Abuja, we are committed to providing top-notch efficiency, technical precision, and excellence to our clients.</p>
+                    
+                    <h4 style="margin-top: 20px; color: var(--dark-black);">Our Mission</h4>
+                    <p id="aboutMissionText" style="line-height: 1.5; color: var(--text-muted);">To deliver outstanding, accurate, and rapid business support services using state-of-the-art technologies while making a distinct difference in customer satisfaction.</p>
+
+                    <h4 style="margin-top: 15px; color: var(--dark-black);">Our Vision</h4>
+                    <p id="aboutVisionText" style="line-height: 1.5; color: var(--text-muted);">To become the leading digital services and business operations support centre in the region, recognized for reliability, high quality, and technological adaptation.</p>
+                </div>
+                <div>
+                    <div class="card" style="background: var(--dark-black); color: var(--white);">
+                        <h3 style="color: var(--primary-yellow); margin-bottom: 15px;">Why Choose Us?</h3>
+                        <ul style="list-style-type: square; padding-left: 20px; line-height: 1.8;">
+                            <li>High-speed modern printing equipment</li>
+                            <li>Professional Graphic Design team</li>
+                            <li>Reliable Online Registration handling</li>
+                            <li>Prompt Turnaround Time</li>
+                            <li>Secure Document Management System</li>
+                            <li>Affordable and Transparent Pricing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SERVICES SECTION -->
+        <section id="servicesSection" class="section">
+            <h2 class="section-title">Our Professional Services</h2>
+            <div class="grid-3" id="publicServicesGrid">
+                <!-- Dynamically Rendered -->
+            </div>
+        </section>
+
+        <!-- 4. PRODUCTS SECTION -->
+        <section id="productsSection" class="section">
+            <h2 class="section-title">Products Offered</h2>
+            <div class="grid-4" id="publicProductsGrid">
+                <!-- Dynamically Rendered -->
+            </div>
+        </section>
+
+        <!-- 5. PRICING SECTION -->
+        <section id="pricingSection" class="section">
+            <h2 class="section-title">Transparent Price List</h2>
+            <p style="margin-bottom: 15px; color: var(--text-muted);">View the standard base rates for our services and products.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item / Service Name</th>
+                            <th>Category</th>
+                            <th>Base Rate / Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="publicPricingTable">
+                        <!-- Dynamically Rendered -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 6. GALLERY SECTION -->
+        <section id="gallerySection" class="section">
+            <h2 class="section-title">Photo Gallery</h2>
+            <div class="grid-3" id="publicGalleryGrid">
+                <!-- Dynamically Rendered -->
+            </div>
+        </section>
+
+        <!-- 7. CONTACT SECTION -->
+        <section id="contactSection" class="section">
+            <h2 class="section-title">Contact & Location</h2>
+            <div class="grid-2">
+                <div>
+                    <div class="card" style="margin-bottom: 15px;">
+                        <h4>Business Address</h4>
+                        <p id="contactAddress">Beside Unity Baptist Church Utako, Shop No. 2, Abuja, Nigeria</p>
+                    </div>
+                    <div class="card" style="margin-bottom: 15px;">
+                        <h4>Telephone Lines</h4>
+                        <p id="contactPhone">09155668730</p>
+                    </div>
+                    <div class="card" style="margin-bottom: 15px;">
+                        <h4>WhatsApp Support</h4>
+                        <p id="contactWhatsapp">08089963511</p>
+                    </div>
+                    <div class="card" style="margin-bottom: 15px;">
+                        <h4>Email & Hours</h4>
+                        <p id="contactEmail">yooneekbusinesscentre@gmail.com</p>
+                        <p id="contactHours">Mon - Sat: 8:00 AM - 7:00 PM</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="card">
+                        <h3>Send Us a Direct Message</h3>
+                        <form id="publicInquiryForm" onsubmit="submitPublicInquiry(event)">
+                            <div class="form-group">
+                                <label>Your Full Name</label>
+                                <input type="text" id="inqName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone / WhatsApp Number</label>
+                                <input type="text" id="inqPhone" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Message Subject</label>
+                                <input type="text" id="inqSubject" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Message / Order Details</label>
+                                <textarea id="inqMessage" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn" style="width:100%;">Submit Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. PORTAL AUTHENTICATION SECTION (LOGIN/VERIFICATION) -->
+        <section id="portalAuthSection" class="section">
+            <div style="max-width: 450px; margin: 0 auto;">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchAuthTab('login')">Access Portal</button>
+                    <button class="auth-tab" onclick="switchAuthTab('info')">System Policy</button>
+                </div>
+
+                <div id="authLoginForm">
+                    <h2 style="text-align: center; margin-bottom: 15px;">Sign In</h2>
+                    <div style="background:#FFF3CD; color:#856404; padding:10px; border-radius:4px; margin-bottom:15px; font-size:12px;">
+                        <strong>Strict Security Rule:</strong> Access is forbidden unless your name/account has been whitelisted and pre-added by the System Administrator.
+                    </div>
+                    <form onsubmit="handlePortalLogin(event)">
+                        <div class="form-group">
+                            <label>Select Portal Role</label>
+                            <select id="authRole" onchange="toggleAdminPassField()">
+                                <option value="client">Client / Customer</option>
+                                <option value="student">Trainee / Student</option>
+                                <option value="admin">System Administrator</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Full Name / ID</label>
+                            <input type="text" id="authIdentifier" placeholder="Enter full name as registered" required>
+                        </div>
+                        <div class="form-group" id="adminPassGroup" style="display: none;">
+                            <label>Admin Access Code</label>
+                            <input type="password" id="authAdminPassword" placeholder="Default: admin123">
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Authenticate & Enter</button>
+                    </form>
+                </div>
+
+                <div id="authInfoPanel" style="display: none;">
+                    <h3>Access Protocols</h3>
+                    <p style="font-size: 13px; margin-top: 10px; line-height: 1.5;">
+                        To protect files and client documents, our system strictly enforces user identity verification. If you are a new client or student trainee, please visit our physical office at Shop No. 2, Beside Unity Baptist Church Utako to have the Administrator create your account profile.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. DASHBOARD PORTAL (DYNAMIC FOR ADMIN / CLIENT / STUDENT) -->
+        <section id="dashboardSection" class="section">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--gray-border); padding-bottom: 10px; margin-bottom: 20px; flex-wrap:wrap; gap:10px;">
+                <div>
+                    <h2>System Control Portal</h2>
+                    <p id="portalWelcomeMsg" style="color: var(--text-muted); font-size:14px;"></p>
+                </div>
+                <button class="btn btn-danger" onclick="handlePortalLogout()">Logout & Exit System</button>
+            </div>
+
+            <!-- ADMIN PORTAL CONTROLS -->
+            <div id="adminPortalView" style="display: none;">
+                <div class="auth-tabs" style="overflow-x:auto;">
+                    <button class="auth-tab active" onclick="showAdminTab('admReqTab')">Service Requests & Documents</button>
+                    <button class="auth-tab" onclick="showAdminTab('admCmsTab')">CMS & Content Manager</button>
+                    <button class="auth-tab" onclick="showAdminTab('admUserTab')">Client & Student Roster</button>
+                    <button class="auth-tab" onclick="showAdminTab('admInqTab')">Customer Feedback/Messages</button>
+                    <button class="auth-tab" onclick="showAdminTab('admPassTab')">Security & Password Settings</button>
+                </div>
+
+                <!-- Admin Tab 1: Requests and Documents Management -->
+                <div id="admReqTab" class="admin-tab-content">
+                    <h3>Client Document Submissions & Printing Orders</h3>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ref ID</th>
+                                    <th>Client Name</th>
+                                    <th>Service Requested</th>
+                                    <th>Submission Notes</th>
+                                    <th>Attached Document</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminRequestsTable">
+                                <!-- Dynamic Requests -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Admin Tab 2: CMS Management (Services, Products, Ticker, About) -->
+                <div id="admCmsTab" class="admin-tab-content" style="display: none;">
+                    <h3>Website Dynamic Content Manager</h3>
+                    <div class="grid-2" style="margin-top: 15px;">
+                        
+                        <!-- Logo & Brand Update Card -->
+                        <div class="card">
+                            <h4>Update Logo & Branding</h4>
+                            <div class="form-group" style="margin-top:10px;">
+                                <label>Upload New Logo Image (Direct File)</label>
+                                <input type="file" id="cmsLogoFile" accept="image/*" onchange="uploadDirectLogo(this)">
+                            </div>
+                            <div class="form-group">
+                                <label>Top Ticker Announcement Text</label>
+                                <input type="text" id="cmsTickerInput">
+                            </div>
+                            <button class="btn" onclick="saveBrandingSettings()">Update Branding & Ticker</button>
+                        </div>
+
+                        <!-- Add Service Card -->
+                        <div class="card">
+                            <h4>Add / Edit Service</h4>
+                            <form onsubmit="saveServiceItem(event)">
+                                <div class="form-group">
+                                    <label>Service Title</label>
+                                    <input type="text" id="servTitle" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Service Category</label>
+                                    <input type="text" id="servCategory" placeholder="e.g. Printing, Design" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Base Price / Rate</label>
+                                    <input type="text" id="servPrice" placeholder="e.g. ₦100 / page" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Service Image (Direct Upload)</label>
+                                    <input type="file" id="servImageFile" accept="image/*">
+                                </div>
+                                <button type="submit" class="btn">Save Service Item</button>
+                            </form>
+                        </div>
+
+                        <!-- Add Product Card -->
+                        <div class="card">
+                            <h4>Add / Edit Product</h4>
+                            <form onsubmit="saveProductItem(event)">
+                                <div class="form-group">
+                                    <label>Product Name</label>
+                                    <input type="text" id="prodTitle" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <input type="text" id="prodPrice" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Product Image (Direct Upload)</label>
+                                    <input type="file" id="prodImageFile" accept="image/*">
+                                </div>
+                                <button type="submit" class="btn">Save Product</button>
+                            </form>
+                        </div>
+
+                        <!-- Add News / Event Card -->
+                        <div class="card">
+                            <h4>Post Announcement / Event</h4>
+                            <form onsubmit="saveNewsPost(event)">
+                                <div class="form-group">
+                                    <label>Announcement Headline</label>
+                                    <input type="text" id="newsTitle" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Details / Message</label>
+                                    <textarea id="newsContent" rows="3" required></textarea>
+                                </div>
+                                <button type="submit" class="btn">Publish News</button>
+                            </form>
+                        </div>
+
+                        <!-- Add Gallery Photo Card -->
+                        <div class="card">
+                            <h4>Upload Gallery Photo</h4>
+                            <form onsubmit="saveGalleryImage(event)">
+                                <div class="form-group">
+                                    <label>Photo Caption / Title</label>
+                                    <input type="text" id="galCaption" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Image File (Direct Upload)</label>
+                                    <input type="file" id="galImageFile" accept="image/*" required>
+                                </div>
+                                <button type="submit" class="btn">Upload to Gallery</button>
+                            </form>
+                        </div>
+
+                        <!-- About & Mission Editor -->
+                        <div class="card">
+                            <h4>Edit History, Mission & Vision</h4>
+                            <form onsubmit="saveAboutContent(event)">
+                                <div class="form-group">
+                                    <label>Business Description / History</label>
+                                    <textarea id="cmsHistory" rows="2"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mission Statement</label>
+                                    <textarea id="cmsMission" rows="2"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Vision Statement</label>
+                                    <textarea id="cmsVision" rows="2"></textarea>
+                                </div>
+                                <button type="submit" class="btn">Update About Section</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Admin Tab 3: Roster and Identity Management -->
+                <div id="admUserTab" class="admin-tab-content" style="display: none;">
+                    <h3>Manage Whitelisted Clients & Student Trainees</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Users can only log into the website portal if they exist in this database.</p>
+                    
+                    <div class="card" style="margin-bottom: 20px;">
+                        <h4>Add Person to System Portal</h4>
+                        <form onsubmit="saveUserPerson(event)" style="display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; margin-top: 10px;">
+                            <div class="form-group" style="flex: 1; min-width: 200px; margin:0;">
+                                <label>Full Name</label>
+                                <input type="text" id="usrName" placeholder="e.g. John Doe" required>
+                            </div>
+                            <div class="form-group" style="flex: 1; min-width: 150px; margin:0;">
+                                <label>User Category</label>
+                                <select id="usrRole">
+                                    <option value="client">Client</option>
+                                    <option value="student">Trainee Student</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="flex: 1; min-width: 200px; margin:0;">
+                                <label>Passport Photo (Direct Upload)</label>
+                                <input type="file" id="usrPassportFile" accept="image/*">
+                            </div>
+                            <button type="submit" class="btn">Register & Whitelist User</button>
+                        </form>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Passport</th>
+                                    <th>Full Name</th>
+                                    <th>Category</th>
+                                    <th>Date Added</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminUserTable">
+                                <!-- Dynamic Users -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Admin Tab 4: Customer Inquiries -->
+                <div id="admInqTab" class="admin-tab-content" style="display: none;">
+                    <h3>Public Inquiries & Messages</h3>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Sender Name</th>
+                                    <th>Contact</th>
+                                    <th>Subject</th>
+                                    <th>Message Body</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminInquiriesTable">
+                                <!-- Dynamic Inquiries -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Admin Tab 5: Password Management -->
+                <div id="admPassTab" class="admin-tab-content" style="display: none;">
+                    <div class="card" style="max-width: 500px;">
+                        <h3>Change Administrator Password</h3>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Change your master password here. Password remains completely masked and secure.</p>
+                        <form onsubmit="changeAdminMasterPassword(event)">
+                            <div class="form-group">
+                                <label>Current Admin Password</label>
+                                <input type="password" id="oldAdminPass" required>
+                            </div>
+                            <div class="form-group">
+                                <label>New Admin Password</label>
+                                <input type="password" id="newAdminPass" required>
+                            </div>
+                            <button type="submit" class="btn">Update Master Password</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CLIENT PORTAL VIEW -->
+            <div id="clientPortalView" style="display: none;">
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>Submit Document for Printing / Service</h3>
+                        <form onsubmit="submitClientRequest(event)" style="margin-top: 15px;">
+                            <div class="form-group">
+                                <label>Select Required Service</label>
+                                <select id="cliServiceSelect">
+                                    <!-- Dynamic Options -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Upload Document / File (PDF, Image, Doc)</label>
+                                <input type="file" id="cliDocumentFile" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Instructions / Quantity / Specifications</label>
+                                <textarea id="cliInstructions" rows="3" placeholder="e.g. 5 copies, Color printing, A4 size, Double sided" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Send Document to Centre</button>
+                        </form>
+                    </div>
+
+                    <div>
+                        <h3>My Order & Document Submissions</h3>
+                        <div class="table-responsive" style="margin-top: 15px;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Ref ID</th>
+                                        <th>Service</th>
+                                        <th>Status</th>
+                                        <th>Admin Feedback</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="clientHistoryTable">
+                                    <!-- Dynamic Rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STUDENT / TRAINEE PORTAL VIEW -->
+            <div id="studentPortalView" style="display: none;">
+                <div class="card" style="margin-bottom: 20px; background: var(--secondary-black); color: var(--white);">
+                    <div style="display:flex; align-items:center; gap:20px;">
+                        <div id="studentProfilePassport">
+                            <!-- Passport Image -->
+                        </div>
+                        <div>
+                            <h2 style="color:var(--primary-yellow);" id="studentProfileName">Student Profile</h2>
+                            <p>Status: Active Computer/IT Trainee</p>
+                            <p>YOONEEK BUSINESS CENTRE Technical Institute</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Trainee Notifications & Announcements</h3>
+                <div id="studentNewsFeed" style="margin-top: 15px;">
+                    <!-- Student News Feed -->
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- Main Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h4>YOONEEK BUSINESS CENTRE</h4>
+                <p style="font-size: 12px; color:#CCC;">Providing standard digital support, printing, graphic designs, online registrations, and document security.</p>
+            </div>
+            <div>
+                <h4>Contact Details</h4>
+                <p>📍Shop No. 2, Beside Unity Baptist Church, Augustus Aikhomu Way Utako Abuja</p>
+                <p>📞 09155668730</p>
+            </div>
+            <div>
+                <h4>Working Hours</h4>
+                <p>Monday - Saturday:</p>
+                <p style="color:var(--primary-yellow);">8:00 AM - 7:00 PM</p>
+                <p>Sunday: Closed</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 YOONEEK BUSINESS CENTRE. All Rights Reserved. "Making a difference".
+        </div>
+    </footer>
+
+    <!-- JavaScript Data Engine & Interaction Script -->
+    <script>
+        /* Database Initialization with Default Data */
+        const DB_KEY = 'YOONEEK_DB_v2';
+
+        function getDB() {
+            const data = localStorage.getItem(DB_KEY);
+            if (!data) {
+                const defaultDB = {
+                    adminPass: 'admin123',
+                    branding: {
+                        logo: '',
+                        ticker: 'Welcome to YOONEEK BUSINESS CENTRE! Fast Printing, Photocopying, Graphic Design, and Online Registrations. Visit us at Shop No. 2, Beside Unity Baptist Church, Utako.',
+                        history: 'YOONEEK BUSINESS CENTRE is a premier hub for modern digital, secretarial, document processing, and educational support solutions.',
+                        mission: 'To deliver outstanding, accurate, and rapid business support services using state-of-the-art technologies while making a distinct difference.',
+                        vision: 'To become the leading digital services and business operations support centre in the region.'
+                    },
+                    services: [
+                        { id: 1, title: 'Commercial Printing', category: 'Printing', price: '₦100 / page', img: 'https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?auto=format&fit=crop&w=400&q=80' },
+                        { id: 2, title: 'Color Photocopying', category: 'Photocopy', price: '₦50 / page', img: 'https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&w=400&q=80' },
+                        { id: 3, title: 'Graphic Design', category: 'Design', price: 'Negotiable', img: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=400&q=80' },
+                        { id: 4, title: 'Document Lamination', category: 'Finishing', price: '₦300 / sheet', img: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80' },
+                        { id: 5, title: 'Online Registration', category: 'Internet', price: 'From ₦1,000', img: 'https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?auto=format&fit=crop&w=400&q=80' }
+                    ],
+                    products: [
+                        { id: 1, title: 'A4 Printing Paper Rim', price: '₦4,500', img: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=400&q=80' },
+                        { id: 2, title: 'Office Stationery Pack', price: '₦2,000', img: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=400&q=80' }
+                    ],
+                    news: [
+                        { id: 1, title: 'New High-Speed Printers Installed', content: 'We have upgraded our commercial printers for instant bulk printing with ultra-sharp colors.', date: '2026-08-10' }
+                    ],
+                    gallery: [
+                        { id: 1, caption: 'Our Printing & Service Floor', img: 'https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?auto=format&fit=crop&w=400&q=80' }
+                    ],
+                    users: [
+                        { id: 1, name: 'John Doe', role: 'client', passport: '', addedDate: '2026-08-01' },
+                        { id: 2, name: 'Mary Student', role: 'student', passport: '', addedDate: '2026-08-05' }
+                    ],
+                    requests: [
+                        { id: 'YBC-101', clientName: 'John Doe', service: 'Commercial Printing', notes: '10 Copies colored A4', fileData: '', fileName: 'SampleDocument.pdf', status: 'Pending', feedback: 'Received, processing shortly.' }
+                    ],
+                    inquiries: []
+                };
+                localStorage.setItem(DB_KEY, JSON.stringify(defaultDB));
+                return defaultDB;
+            }
+            return JSON.parse(data);
+        }
+
+        function saveDB(db) {
+            localStorage.setItem(DB_KEY, JSON.stringify(db));
+            refreshUI();
+        }
+
+        /* Active Session Tracking */
+        let currentUserSession = null; // { role: 'admin'|'client'|'student', name: '' }
+
+        /* Navigation Routing */
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) targetSection.classList.add('active');
+
+            if (sectionId === 'dashboardSection' && !currentUserSession) {
+                showSection('portalAuthSection');
+                return;
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* Clock Utility */
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clockDisplay').innerText = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        /* Authentication and Portal Controls */
+        function toggleAdminPassField() {
+            const role = document.getElementById('authRole').value;
+            document.getElementById('adminPassGroup').style.display = (role === 'admin') ? 'block' : 'none';
+        }
+
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            if (tab === 'login') {
+                document.getElementById('authLoginForm').style.display = 'block';
+                document.getElementById('authInfoPanel').style.display = 'none';
+                event.target.classList.add('active');
+            } else {
+                document.getElementById('authLoginForm').style.display = 'none';
+                document.getElementById('authInfoPanel').style.display = 'block';
+                event.target.classList.add('active');
+            }
+        }
+
+        function handlePortalLogin(e) {
+            e.preventDefault();
+            const role = document.getElementById('authRole').value;
+            const identifier = document.getElementById('authIdentifier').value.trim();
+            const adminPass = document.getElementById('authAdminPassword').value;
+            const db = getDB();
+
+            if (role === 'admin') {
+                if (adminPass === db.adminPass) {
+                    currentUserSession = { role: 'admin', name: 'System Administrator' };
+                    setupDashboard();
+                } else {
+                    alert('Invalid Administrator Password access code!');
+                }
+                return;
+            }
+
+            // Verify Whitelist User Database
+            const foundUser = db.users.find(u => u.role === role && u.name.toLowerCase() === identifier.toLowerCase());
+            if (foundUser) {
+                currentUserSession = foundUser;
+                setupDashboard();
+            } else {
+                alert(`Access Denied! The name "${identifier}" is not found in the ${role} database. Please contact the Administrator to be added.`);
+            }
+        }
+
+        function setupDashboard() {
+            document.getElementById('authNavBtn').innerText = 'My Portal';
+            showSection('dashboardSection');
+            
+            document.getElementById('adminPortalView').style.display = 'none';
+            document.getElementById('clientPortalView').style.display = 'none';
+            document.getElementById('studentPortalView').style.display = 'none';
+
+            document.getElementById('portalWelcomeMsg').innerText = `Logged in as: ${currentUserSession.name} (${currentUserSession.role.toUpperCase()})`;
+
+            if (currentUserSession.role === 'admin') {
+                document.getElementById('adminPortalView').style.display = 'block';
+                renderAdminTables();
+            } else if (currentUserSession.role === 'client') {
+                document.getElementById('clientPortalView').style.display = 'block';
+                renderClientPortal();
+            } else if (currentUserSession.role === 'student') {
+                document.getElementById('studentPortalView').style.display = 'block';
+                renderStudentPortal();
+            }
+        }
+
+        function handlePortalLogout() {
+            currentUserSession = null;
+            document.getElementById('authNavBtn').innerText = 'Portal Access';
+            showSection('homeSection');
+            alert('You have logged out successfully.');
+        }
+
+        /* Admin Dashboard Sub-Tab Handler */
+        function showAdminTab(tabId) {
+            document.querySelectorAll('.admin-tab-content').forEach(c => c.style.display = 'none');
+            document.getElementById(tabId).style.display = 'block';
+        }
+
+        /* Image Helper: Convert File Input to Base64 */
+        function readFileAsBase64(fileInput) {
+            return new Promise((resolve, reject) => {
+                if (!fileInput.files || !fileInput.files[0]) {
+                    resolve('');
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+                reader.readAsDataURL(fileInput.files[0]);
+            });
+        }
+
+        /* Dynamic Render Functions */
+        function refreshUI() {
+            const db = getDB();
+
+            // Render Branding
+            if (db.branding.logo) {
+                document.getElementById('navLogoContainer').innerHTML = `<img src="${db.branding.logo}" alt="Logo">`;
+            }
+            document.getElementById('scrollingTicker').innerText = db.branding.ticker;
+            document.getElementById('aboutHistoryText').innerText = db.branding.history;
+            document.getElementById('aboutMissionText').innerText = db.branding.mission;
+            document.getElementById('aboutVisionText').innerText = db.branding.vision;
+
+            // Render Public Services
+            const homeServGrid = document.getElementById('homeServicesGrid');
+            const pubServGrid = document.getElementById('publicServicesGrid');
+            const pubPriceTable = document.getElementById('publicPricingTable');
+            const cliSelect = document.getElementById('cliServiceSelect');
+
+            homeServGrid.innerHTML = '';
+            pubServGrid.innerHTML = '';
+            pubPriceTable.innerHTML = '';
+            if (cliSelect) cliSelect.innerHTML = '';
+
+            db.services.forEach((s, idx) => {
+                const cardHTML = `
+                    <div class="card">
+                        <img src="${s.img || 'https://via.placeholder.com/400x200'}" alt="${s.title}">
+                        <h3>${s.title}</h3>
+                        <p style="font-size:12px; color:var(--text-muted);">${s.category}</p>
+                        <div class="price-badge">${s.price}</div>
+                    </div>
+                `;
+                pubServGrid.innerHTML += cardHTML;
+                if (idx < 3) homeServGrid.innerHTML += cardHTML;
+
+                pubPriceTable.innerHTML += `
+                    <tr>
+                        <td><strong>${s.title}</strong></td>
+                        <td>${s.category}</td>
+                        <td><span class="price-badge">${s.price}</span></td>
+                    </tr>
+                `;
+
+                if (cliSelect) {
+                    cliSelect.innerHTML += `<option value="${s.title}">${s.title} (${s.price})</option>`;
+                }
+            });
+
+            // Render Public Products
+            const pubProdGrid = document.getElementById('publicProductsGrid');
+            pubProdGrid.innerHTML = '';
+            db.products.forEach(p => {
+                pubProdGrid.innerHTML += `
+                    <div class="card">
+                        <img src="${p.img || 'https://via.placeholder.com/400x200'}" alt="${p.title}">
+                        <h4>${p.title}</h4>
+                        <div class="price-badge">${p.price}</div>
+                    </div>
+                `;
+            });
+
+            // Render News Feed
+            const homeNews = document.getElementById('homeNewsFeed');
+            homeNews.innerHTML = '';
+            if (db.news.length === 0) {
+                homeNews.innerHTML = '<p>No announcements right now.</p>';
+            } else {
+                db.news.forEach(n => {
+                    homeNews.innerHTML += `
+                        <div style="background:white; padding:15px; border-radius:4px; margin-top:10px;">
+                            <h4 style="color:var(--dark-black);">${n.title}</h4>
+                            <small style="color:var(--text-muted);">${n.date}</small>
+                            <p style="margin-top:5px; font-size:14px;">${n.content}</p>
+                        </div>
+                    `;
+                });
+            }
+
+            // Render Gallery
+            const pubGal = document.getElementById('publicGalleryGrid');
+            pubGal.innerHTML = '';
+            db.gallery.forEach(g => {
+                pubGal.innerHTML += `
+                    <div class="card">
+                        <img src="${g.img}" alt="Gallery image">
+                        <p style="font-weight:600; margin-top:8px;">${g.caption}</p>
+                    </div>
+                `;
+            });
+        }
+
+        /* Admin Dynamic Action Handlers */
+        async function uploadDirectLogo(input) {
+            const base64 = await readFileAsBase64(input);
+            if (base64) {
+                const db = getDB();
+                db.branding.logo = base64;
+                saveDB(db);
+                alert('Business logo updated successfully!');
+            }
+        }
+
+        function saveBrandingSettings() {
+            const db = getDB();
+            const ticker = document.getElementById('cmsTickerInput').value;
+            if (ticker) db.branding.ticker = ticker;
+            saveDB(db);
+            alert('Branding and Ticker updated!');
+        }
+
+        async function saveServiceItem(e) {
+            e.preventDefault();
+            const db = getDB();
+            const imgFile = document.getElementById('servImageFile');
+            const imgBase64 = await readFileAsBase64(imgFile);
+
+            const newService = {
+                id: Date.now(),
+                title: document.getElementById('servTitle').value,
+                category: document.getElementById('servCategory').value,
+                price: document.getElementById('servPrice').value,
+                img: imgBase64 || 'https://via.placeholder.com/400x200'
+            };
+
+            db.services.push(newService);
+            saveDB(db);
+            alert('Service Saved!');
+            e.target.reset();
+        }
+
+        async function saveProductItem(e) {
+            e.preventDefault();
+            const db = getDB();
+            const imgFile = document.getElementById('prodImageFile');
+            const imgBase64 = await readFileAsBase64(imgFile);
+
+            const newProd = {
+                id: Date.now(),
+                title: document.getElementById('prodTitle').value,
+                price: document.getElementById('prodPrice').value,
+                img: imgBase64 || 'https://via.placeholder.com/400x200'
+            };
+
+            db.products.push(newProd);
+            saveDB(db);
+            alert('Product Saved!');
+            e.target.reset();
+        }
+
+        function saveNewsPost(e) {
+            e.preventDefault();
+            const db = getDB();
+            const newNews = {
+                id: Date.now(),
+                title: document.getElementById('newsTitle').value,
+                content: document.getElementById('newsContent').value,
+                date: new Date().toISOString().split('T')[0]
+            };
+            db.news.unshift(newNews);
+            saveDB(db);
+            alert('News Published!');
+            e.target.reset();
+        }
+
+        async function saveGalleryImage(e) {
+            e.preventDefault();
+            const db = getDB();
+            const imgFile = document.getElementById('galImageFile');
+            const imgBase64 = await readFileAsBase64(imgFile);
+
+            if (!imgBase64) {
+                alert('Please select an image file!');
+                return;
+            }
+
+            db.gallery.push({
+                id: Date.now(),
+                caption: document.getElementById('galCaption').value,
+                img: imgBase64
+            });
+            saveDB(db);
+            alert('Photo uploaded to Gallery!');
+            e.target.reset();
+        }
+
+        function saveAboutContent(e) {
+            e.preventDefault();
+            const db = getDB();
+            db.branding.history = document.getElementById('cmsHistory').value || db.branding.history;
+            db.branding.mission = document.getElementById('cmsMission').value || db.branding.mission;
+            db.branding.vision = document.getElementById('cmsVision').value || db.branding.vision;
+            saveDB(db);
+            alert('About section updated!');
+        }
+
+        async function saveUserPerson(e) {
+            e.preventDefault();
+            const db = getDB();
+            const passFile = document.getElementById('usrPassportFile');
+            const passBase64 = await readFileAsBase64(passFile);
+
+            const newUser = {
+                id: Date.now(),
+                name: document.getElementById('usrName').value.trim(),
+                role: document.getElementById('usrRole').value,
+                passport: passBase64,
+                addedDate: new Date().toISOString().split('T')[0]
+            };
+
+            db.users.push(newUser);
+            saveDB(db);
+            alert(`User "${newUser.name}" successfully added and whitelisted!`);
+            e.target.reset();
+            renderAdminTables();
+        }
+
+        function changeAdminMasterPassword(e) {
+            e.preventDefault();
+            const db = getDB();
+            const oldP = document.getElementById('oldAdminPass').value;
+            const newP = document.getElementById('newAdminPass').value;
+
+            if (oldP !== db.adminPass) {
+                alert('Current Admin Password is incorrect!');
+                return;
+            }
+
+            db.adminPass = newP;
+            saveDB(db);
+            alert('Master Administrator Password changed successfully!');
+            e.target.reset();
+        }
+
+        /* Render Admin Dynamic Tables */
+        function renderAdminTables() {
+            const db = getDB();
+
+            // Requests Table
+            const reqTbody = document.getElementById('adminRequestsTable');
+            reqTbody.innerHTML = '';
+            db.requests.forEach((r, idx) => {
+                let statusClass = 'status-pending';
+                if (r.status === 'Processing') statusClass = 'status-processing';
+                if (r.status === 'Completed') statusClass = 'status-completed';
+
+                let fileDownload = 'No File';
+                if (r.fileData) {
+                    fileDownload = `<a href="${r.fileData}" download="${r.fileName}" class="btn" style="padding:3px 8px; font-size:11px;">View & Download</a>`;
+                }
+
+                reqTbody.innerHTML += `
+                    <tr>
+                        <td><strong>${r.id}</strong></td>
+                        <td>${r.clientName}</td>
+                        <td>${r.service}</td>
+                        <td>${r.notes}</td>
+                        <td>${fileDownload}</td>
+                        <td><span class="status-pill ${statusClass}">${r.status}</span></td>
+                        <td>
+                            <select onchange="updateRequestStatus('${r.id}', this.value)" style="padding:4px; font-size:12px;">
+                                <option value="Pending" ${r.status==='Pending'?'selected':''}>Pending</option>
+                                <option value="Processing" ${r.status==='Processing'?'selected':''}>Processing</option>
+                                <option value="Completed" ${r.status==='Completed'?'selected':''}>Completed</option>
+                            </select>
+                            <button class="btn btn-danger" onclick="deleteRequest('${r.id}')" style="padding:4px 8px; font-size:11px;">Remove</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Whitelisted Users Table
+            const userTbody = document.getElementById('adminUserTable');
+            userTbody.innerHTML = '';
+            db.users.forEach(u => {
+                const passImg = u.passport ? `<img src="${u.passport}" class="img-thumb">` : `<div class="img-thumb" style="background:#DDD; display:flex; align-items:center; justify-content:center; font-size:10px;">No Pic</div>`;
+                userTbody.innerHTML += `
+                    <tr>
+                        <td>${passImg}</td>
+                        <td><strong>${u.name}</strong></td>
+                        <td><span class="price-badge">${u.role.toUpperCase()}</span></td>
+                        <td>${u.addedDate}</td>
+                        <td>
+                            <button class="btn btn-danger" onclick="removeUserPerson(${u.id})" style="padding:4px 8px; font-size:11px;">Delete Profile</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Inquiries Table
+            const inqTbody = document.getElementById('adminInquiriesTable');
+            inqTbody.innerHTML = '';
+            db.inquiries.forEach((inq, idx) => {
+                inqTbody.innerHTML += `
+                    <tr>
+                        <td>${inq.date}</td>
+                        <td><strong>${inq.name}</strong></td>
+                        <td>${inq.phone}</td>
+                        <td>${inq.subject}</td>
+                        <td>${inq.message}</td>
+                        <td>
+                            <button class="btn btn-danger" onclick="deleteInquiry(${idx})" style="padding:4px 8px; font-size:11px;">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function updateRequestStatus(reqId, newStatus) {
+            const db = getDB();
+            const req = db.requests.find(r => r.id === reqId);
+            if (req) {
+                req.status = newStatus;
+                req.feedback = `Status updated to ${newStatus} on ${new Date().toLocaleTimeString()}`;
+                saveDB(db);
+                renderAdminTables();
+            }
+        }
+
+        function deleteRequest(reqId) {
+            if (!confirm('Are you sure you want to delete this service request?')) return;
+            const db = getDB();
+            db.requests = db.requests.filter(r => r.id !== reqId);
+            saveDB(db);
+            renderAdminTables();
+        }
+
+        function removeUserPerson(userId) {
+            if (!confirm('Remove this user from access roster? They will lose login ability instantly.')) return;
+            const db = getDB();
+            db.users = db.users.filter(u => u.id !== userId);
+            saveDB(db);
+            renderAdminTables();
+        }
+
+        function deleteInquiry(idx) {
+            const db = getDB();
+            db.inquiries.splice(idx, 1);
+            saveDB(db);
+            renderAdminTables();
+        }
+
+        /* Client Portal Handlers */
+        function openPortalServiceRequest() {
+            if (!currentUserSession) {
+                showSection('portalAuthSection');
+                alert('Please authenticate into your whitelisted portal account first.');
+            } else {
+                showSection('dashboardSection');
+            }
+        }
+
+        async function submitClientRequest(e) {
+            e.preventDefault();
+            const db = getDB();
+            const fileInput = document.getElementById('cliDocumentFile');
+            const fileBase64 = await readFileAsBase64(fileInput);
+
+            const newReq = {
+                id: 'YBC-' + Math.floor(100 + Math.random() * 900),
+                clientName: currentUserSession.name,
+                service: document.getElementById('cliServiceSelect').value,
+                notes: document.getElementById('cliInstructions').value,
+                fileData: fileBase64,
+                fileName: fileInput.files[0] ? fileInput.files[0].name : 'Document',
+                status: 'Pending',
+                feedback: 'Order received. Awaiting admin review.'
+            };
+
+            db.requests.unshift(newReq);
+            saveDB(db);
+            alert(`Document request submitted! Your tracking ID is: ${newReq.id}`);
+            e.target.reset();
+            renderClientPortal();
+        }
+
+        function renderClientPortal() {
+            const db = getDB();
+            const clientHistory = document.getElementById('clientHistoryTable');
+            clientHistory.innerHTML = '';
+
+            const myRequests = db.requests.filter(r => r.clientName.toLowerCase() === currentUserSession.name.toLowerCase());
+            
+            if (myRequests.length === 0) {
+                clientHistory.innerHTML = '<tr><td colspan="4">No submitted requests found.</td></tr>';
+                return;
+            }
+
+            myRequests.forEach(r => {
+                let statusClass = 'status-pending';
+                if (r.status === 'Processing') statusClass = 'status-processing';
+                if (r.status === 'Completed') statusClass = 'status-completed';
+
+                clientHistory.innerHTML += `
+                    <tr>
+                        <td><strong>${r.id}</strong></td>
+                        <td>${r.service}</td>
+                        <td><span class="status-pill ${statusClass}">${r.status}</span></td>
+                        <td>${r.feedback}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        /* Student Portal Handlers */
+        function renderStudentPortal() {
+            const db = getDB();
+            document.getElementById('studentProfileName').innerText = currentUserSession.name;
+            const passportContainer = document.getElementById('studentProfilePassport');
+
+            if (currentUserSession.passport) {
+                passportContainer.innerHTML = `<img src="${currentUserSession.passport}" style="width:70px; height:70px; border-radius:50%; object-fit:cover; border:2px solid var(--primary-yellow);">`;
+            } else {
+                passportContainer.innerHTML = `<div style="width:70px; height:70px; border-radius:50%; background:var(--primary-yellow); color:var(--dark-black); display:flex; align-items:center; justify-content:center; font-weight:bold;">Trainee</div>`;
+            }
+
+            const newsContainer = document.getElementById('studentNewsFeed');
+            newsContainer.innerHTML = '';
+            db.news.forEach(n => {
+                newsContainer.innerHTML += `
+                    <div class="card" style="margin-bottom:10px;">
+                        <h4>${n.title}</h4>
+                        <small style="color:var(--text-muted);">${n.date}</small>
+                        <p style="margin-top:5px; font-size:13px;">${n.content}</p>
+                    </div>
+                `;
+            });
+        }
+
+        /* Public Contact Inquiry Handler */
+        function submitPublicInquiry(e) {
+            e.preventDefault();
+            const db = getDB();
+            const newInq = {
+                name: document.getElementById('inqName').value,
+                phone: document.getElementById('inqPhone').value,
+                subject: document.getElementById('inqSubject').value,
+                message: document.getElementById('inqMessage').value,
+                date: new Date().toISOString().split('T')[0]
+            };
+
+            db.inquiries.unshift(newInq);
+            saveDB(db);
+            alert('Your message has been sent to YOONEEK BUSINESS CENTRE! We will contact you shortly.');
+            e.target.reset();
+        }
+
+        // Initialize Application
+        window.onload = function() {
+            refreshUI();
+        };
+    </script>
+</body>
